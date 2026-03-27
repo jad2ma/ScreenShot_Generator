@@ -1,0 +1,323 @@
+/**
+ * App Store Screenshots - Web UI Server
+ *
+ * Web UI server and generation API.
+ */
+
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { serve } from "@hono/node-server";
+import { serveStatic } from "@hono/node-server/serve-static";
+import { join } from "node:path";
+import * as fs from "node:fs/promises";
+import { existsSync } from "node:fs";
+import process from "node:process";
+import { GLOW_COLORS } from "./renderer-components/constants.ts";
+import { DEFAULT_PALETTES, GRADIENT_TEMPLATES } from "./lib/index.ts";
+import {
+  getProjectOutputDir,
+  initializeProjects,
+  listProjects,
+  loadProject,
+} from "./projects.ts";
+import type { ProjectConfig } from "@types";
+
+// Import route modules
+import {
+  createAssetMiddleware,
+  createAssetRoutes,
+  createConfigRoutes,
+  createGenerateRoutes,
+  createProjectRoutes,
+  createStaticUIRoutes,
+} from "@routes";
+
+const app = new Hono();
+
+// Enable CORS for Vite dev server
+app.use(
+  "*",
+  cors({
+    origin: (origin) => {
+      // Allow local development and Railway subdomains
+      if (
+        !origin || 
+        origin.includes("localhost") || 
+        origin.includes("127.0.0.1") || 
+        origin.endsWith(".railway.app")
+      ) {
+        return origin;
+      }
+      return null;
+    },
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type"],
+  }),
+);
+
+// Current active project
+let currentProjectId: string = "default";
+let currentConfig: ProjectConfig | null = null;
+
+// Initialize projects on startup
+await initializeProjects().then((id) => {
+  currentProjectId = id;
+});
+
+/**
+ * Get current config, loading if necessary
+ */
+async function getConfig(): Promise<ProjectConfig> {
+  if (!currentConfig) {
+    currentConfig = await loadProject(currentProjectId);
+  }
+  return currentConfig;
+}
+
+/**
+ * Reload config from disk (currently unused, kept for future use)
+ */
+async function _reloadConfig(): Promise<ProjectConfig> {
+  currentConfig = await loadProject(currentProjectId);
+  return currentConfig;
+}
+
+// ============================================================
+// State accessors for route modules
+// ============================================================
+const getProjectState = () => ({
+  currentProjectId,
+  currentConfig,
+});
+
+const setProjectState = (
+  updates: Partial<
+    { currentProjectId: string; currentConfig: ProjectConfig | null }
+  >,
+) => {
+  if (updates.currentProjectId !== undefined) {
+    currentProjectId = updates.currentProjectId;
+  }
+  if (updates.currentConfig !== undefined) {
+    currentConfig = updates.currentConfig;
+  }
+};
+
+const getCurrentProjectId = () => currentProjectId;
+
+// ============================================================
+// Init API for Vite frontend
+// ============================================================
+app.get("/api/init", async (c) => {
+  const config = await getConfig();
+  const projects = await listProjects();
+
+  // Convert templates and palettes to simple objects
+  const gradientTemplatesObj: Record<string, string> = {};
+  for (const t of GRADIENT_TEMPLATES) {
+    gradientTemplatesObj[t.id] = t.template;
+  }
+
+  const palettesObj: Record<
+    string,
+    { primary: string; secondary: string; accent: string }
+  > = {};
+  for (const p of DEFAULT_PALETTES) {
+    palettesObj[p.name] = p.palette;
+  }
+
+  return c.json({
+    config,
+    projects,
+    projectId: currentProjectId,
+    glowColors: GLOW_COLORS,
+    gradientTemplates: gradientTemplatesObj,
+    palettes: palettesObj,
+  });
+});
+
+// ============================================================
+// Mount Route Modules
+// ============================================================
+
+// Asset middleware (serves static files from project assets directory)
+app.use("/assets/*", createAssetMiddleware(getCurrentProjectId));
+
+// Project routes (list, create, switch, delete, rename)
+app.route(
+  "/api/projects",
+  createProjectRoutes(getProjectState, setProjectState, getConfig),
+);
+
+// Config routes (CRUD for screenshots, feature graphics, languages)
+app.route(
+  "/api/config",
+  createConfigRoutes(
+    getCurrentProjectId,
+    getConfig,
+    (config) => {
+      currentConfig = config;
+    },
+  ),
+);
+
+// Asset routes (list, upload, rename, delete)
+app.route("/api/assets", createAssetRoutes(getCurrentProjectId));
+
+// Generation routes (export screenshots to PNG)
+app.route(
+  "/api/generate",
+  createGenerateRoutes(
+    getCurrentProjectId,
+    getConfig,
+  ),
+);
+
+// Glow colors API (for UI color picker)
+app.get("/api/glow-colors", (c) => {
+  return c.json(GLOW_COLORS);
+});
+
+// Serve generated output files
+app.get("/output/:path{.+}", async (c) => {
+  const filePath = c.req.param("path");
+  const fullPath = join(getProjectOutputDir(currentProjectId), filePath);
+
+  try {
+    const file = await fs.readFile(fullPath);
+    const ext = fullPath.split(".").pop()?.toLowerCase();
+    const contentType = ext === "png"
+      ? "image/png"
+      : ext === "jpg" || ext === "jpeg"
+      ? "image/jpeg"
+      : "application/octet-stream";
+    return new Response(new Uint8Array(file), { headers: { "Content-Type": contentType } });
+  } catch {
+    return c.notFound();
+  }
+});
+
+// Get previously generated images
+app.get("/api/generated", async (c) => {
+  const outputDir = getProjectOutputDir(currentProjectId);
+  const results: { relativePath: string; status: string }[] = [];
+
+  async function scanDir(dir: string, prefix: string = "") {
+    try {
+      const entries = await fs.readdir(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const relativePath = prefix ? `${prefix}/${entry.name}` : entry.name;
+        if (entry.isDirectory()) {
+          await scanDir(join(dir, entry.name), relativePath);
+        } else if (
+          entry.isFile() &&
+          (entry.name.endsWith(".png") || entry.name.endsWith(".jpg"))
+        ) {
+          results.push({ relativePath, status: "success" });
+        }
+      }
+    } catch {
+      // Directory doesn't exist or can't be read
+    }
+  }
+
+  await scanDir(outputDir);
+  return c.json({ results, outputDir });
+});
+
+// ============================================================
+// Main UI (Static build from dist/ if available)
+// ============================================================
+const useStaticUI = await hasStaticUIBuild();
+
+async function hasStaticUIBuild(): Promise<boolean> {
+  try {
+    return existsSync("./dist/index.html") && existsSync("./dist/assets");
+  } catch {
+    return false;
+  }
+}
+
+if (useStaticUI) {
+  console.log("📦 Serving UI from dist/");
+  
+  // Serve static assets from dist/ (Vite build output puts things in dist/assets/)
+  app.use("/assets/*", serveStatic({ root: "./dist" }));
+  
+  const staticUI = createStaticUIRoutes(
+    getConfig,
+    listProjects,
+    () => currentProjectId,
+    (id, config) => {
+      currentProjectId = id;
+      currentConfig = config;
+    },
+    loadProject,
+  );
+  app.route("/", staticUI);
+  
+  // Static file fallback - serve from dist for any path (including nested assets)
+  // Use /** instead of * to match paths with slashes
+  app.get("/**", serveStatic({ root: "./dist" }));
+} else {
+  // In dev mode, Vite serves the UI on port 5173
+  // This fallback just tells users how to access it
+  app.get("/", (c) => {
+    return c.html(getDevModeHTML());
+  });
+}
+
+/**
+ * Dev mode fallback page
+ * Shown when accessing :3000 directly without a static build
+ */
+function getDevModeHTML(): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App Store Screenshots - API Server</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body { background: #0f0f0f; }</style>
+</head>
+<body class="min-h-screen flex items-center justify-center text-white">
+  <div class="text-center p-8 max-w-lg">
+    <i class="fa-solid fa-server text-6xl text-indigo-500 mb-6"></i>
+    <h1 class="text-2xl font-bold mb-4">API Server Running</h1>
+    <p class="text-zinc-400 mb-6">
+      This is the API server. The UI is served separately.
+    </p>
+    <div class="space-y-4">
+      <div class="bg-zinc-800 rounded p-4">
+        <p class="text-zinc-500 text-sm mb-2">Development mode:</p>
+        <code class="text-indigo-400"><a href="http://localhost:5173">http://localhost:5173</a></code>
+      </div>
+      <div class="bg-zinc-800 rounded p-4">
+        <p class="text-zinc-500 text-sm mb-2">Production build:</p>
+        <code class="text-sm text-zinc-400">npm run build</code>
+        <p class="text-zinc-500 text-xs mt-2">Then restart this server</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+// Start server
+const port = parseInt(process.env.PORT || "3000");
+if (useStaticUI) {
+  console.log(`\n🎨 App Store Screenshots`);
+  console.log(`   Running on port ${port}\n`);
+} else {
+  console.log(`\n🔌 API server ready on port ${port}\n`);
+}
+
+serve({
+  fetch: app.fetch,
+  port,
+});
+
+// Force restart
+

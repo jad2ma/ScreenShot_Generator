@@ -1,0 +1,48 @@
+{
+  "name": "appstore-screenshots",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "Configuration-based screenshot generator for App Store and Google Play",
+  "scripts": {
+    "dev": "concurrently -n api,vite -c blue,magenta \"tsx watch src/server.ts\" \"vite\"",
+    "dev:api": "tsx watch src/server.ts",
+    "dev:vite": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "tsc --noEmit",
+    "start": "tsx src/server.ts",
+    "generate": "tsx src/generate.ts",
+    "convert": "tsx src/convert.ts"
+  },
+  "dependencies": {
+    "puppeteer": "^24.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.7.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  },
+  "keywords": [
+    "app-store",
+    "google-play",
+    "screenshots",
+    "marketing",
+    "deno",
+    "react",
+    "vite"
+  ],
+  "author": "",
+  "license": "MIT"
+}
