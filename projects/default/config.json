@@ -1,0 +1,79 @@
+{
+  "app": {
+    "name": "ios appstore",
+    "iconPath": "",
+    "defaultMascotPath": ""
+  },
+  "theme": {
+    "background": {
+      "gradient": "linear-gradient(135deg, #ef4444 0%, #ef4444 50%, #f97316 50%, #f97316 100%)"
+    },
+    "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+  },
+  "platformDefaults": {
+    "android": {
+      "defaultDevicePresetId": "android-pixel-9-pro"
+    },
+    "ios": {
+      "defaultDevicePresetId": "ios-iphone-17-pro-max"
+    }
+  },
+  "assetsBasePath": "assets",
+  "languages": [
+    {
+      "language": "en",
+      "platforms": {
+        "android": {
+          "dimensions": {
+            "width": 1242,
+            "height": 2688
+          },
+          "screenshots": [],
+          "featureGraphic": null
+        },
+        "ios": {
+          "dimensions": {
+            "width": 1242,
+            "height": 2688
+          },
+          "screenshots": [
+            {
+              "id": "screenshot-1774538561570",
+              "headline": "New Screenshot",
+              "subtitle": "Add a subtitle",
+              "imagePath": "",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 70,
+                "bottomOffset": 6
+              },
+              "typography": {
+                "headlineFontSize": 8
+              }
+            },
+            {
+              "id": "screenshot-1774538563632",
+              "headline": "New Screenshot",
+              "subtitle": "Add a subtitle",
+              "imagePath": "",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 70,
+                "bottomOffset": 6
+              },
+              "typography": {
+                "headlineFontSize": 8
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "palette": {
+    "primary": "#ef4444",
+    "secondary": "#f97316",
+    "accent": "#fbbf24"
+  }
+}
