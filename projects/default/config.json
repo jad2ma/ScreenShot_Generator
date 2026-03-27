@@ -39,31 +39,402 @@
           },
           "screenshots": [
             {
-              "id": "screenshot-1774538561570",
-              "headline": "New Screenshot",
-              "subtitle": "Add a subtitle",
-              "imagePath": "",
+              "id": "screenshot-1774627238362",
+              "headline": "Offline Music Player & MP3 Player",
+              "subtitle": "Discover, search and play your favorite songs with a powerful offline music player and smart recommendations.",
+              "imagePath": "assets/screenshots/Home_Screen.png",
               "glows": [],
               "phoneFrame": {
-                "scale": 70,
-                "bottomOffset": 6
+                "scale": 89,
+                "bottomOffset": -6
               },
               "typography": {
-                "headlineFontSize": 8
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
               }
             },
             {
-              "id": "screenshot-1774538563632",
-              "headline": "New Screenshot",
-              "subtitle": "Add a subtitle",
-              "imagePath": "",
+              "id": "screenshot-1774631062725",
+              "headline": "HD Music Player with Full Controls",
+              "subtitle": "Play MP3, FLAC and all audio formats with smooth playback, background play, and advanced controls.",
+              "imagePath": "assets/screenshots/Now_Playing_Screen.png",
               "glows": [],
               "phoneFrame": {
-                "scale": 70,
-                "bottomOffset": 6
+                "scale": 89,
+                "bottomOffset": -6
               },
               "typography": {
-                "headlineFontSize": 8
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631187190",
+              "headline": "Smart Music Library & Playlists",
+              "subtitle": "Organize songs by artist, album, genre and create custom playlists.",
+              "imagePath": "assets/screenshots/Library_Screen.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631259116",
+              "headline": "Edit MP3 Tags & Album Artwork",
+              "subtitle": "Update title, artist, album and cover art for a fully customized music experience.",
+              "imagePath": "assets/screenshots/Edit_Track_Screen.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631302079",
+              "headline": "Pro Equalizer & Bass Booster",
+              "subtitle": "Enhance sound quality with a powerful equalizer, presets and real-time audio tuning.",
+              "imagePath": "assets/screenshots/Pro_Equalizer.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631553153",
+              "headline": "Advanced Audio Effects & Sound Boost",
+              "subtitle": "Boost bass, adjust stereo, reverb and enjoy premium sound effects like a pro music app.",
+              "imagePath": "assets/screenshots/Audio_Effects.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631696858",
+              "headline": "Customize Audio & App Settings",
+              "subtitle": "Control playback mode, themes and smart music settings for the best experience.",
+              "imagePath": "assets/screenshots/Settings_Screen.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "language": "٧",
+      "platforms": {
+        "android": {
+          "dimensions": {
+            "width": 1242,
+            "height": 2688
+          },
+          "screenshots": [],
+          "featureGraphic": null
+        },
+        "ios": {
+          "dimensions": {
+            "width": 1242,
+            "height": 2688
+          },
+          "screenshots": [
+            {
+              "id": "screenshot-1774627238362",
+              "headline": "Offline Music Player & MP3 Player",
+              "subtitle": "Discover, search and play your favorite songs with a powerful offline music player and smart recommendations.",
+              "imagePath": "assets/screenshots/Home_Screen.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631062725",
+              "headline": "HD Music Player with Full Controls",
+              "subtitle": "Play MP3, FLAC and all audio formats with smooth playback, background play, and advanced controls.",
+              "imagePath": "assets/screenshots/Now_Playing_Screen.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631187190",
+              "headline": "Smart Music Library & Playlists",
+              "subtitle": "Organize songs by artist, album, genre and create custom playlists.",
+              "imagePath": "assets/screenshots/Library_Screen.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631259116",
+              "headline": "Edit MP3 Tags & Album Artwork",
+              "subtitle": "Update title, artist, album and cover art for a fully customized music experience.",
+              "imagePath": "assets/screenshots/Edit_Track_Screen.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631302079",
+              "headline": "Pro Equalizer & Bass Booster",
+              "subtitle": "Enhance sound quality with a powerful equalizer, presets and real-time audio tuning.",
+              "imagePath": "assets/screenshots/Pro_Equalizer.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631553153",
+              "headline": "Advanced Audio Effects & Sound Boost",
+              "subtitle": "Boost bass, adjust stereo, reverb and enjoy premium sound effects like a pro music app.",
+              "imagePath": "assets/screenshots/Audio_Effects.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
+              }
+            },
+            {
+              "id": "screenshot-1774631696858",
+              "headline": "Customize Audio & App Settings",
+              "subtitle": "Control playback mode, themes and smart music settings for the best experience.",
+              "imagePath": "assets/screenshots/Settings_Screen.png",
+              "glows": [],
+              "phoneFrame": {
+                "scale": 89,
+                "bottomOffset": -6
+              },
+              "typography": {
+                "headlineFontSize": 8,
+                "subtitleFontSize": 4
+              },
+              "theme": {
+                "background": {
+                  "gradient": "linear-gradient(135deg, #ef4444 0%, #f97316 100%)"
+                },
+                "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+                "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+              },
+              "palette": {
+                "primary": "#ef4444",
+                "secondary": "#f97316",
+                "accent": "#fbbf24"
               }
             }
           ]
